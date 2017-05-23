@@ -1,0 +1,50 @@
+{% extends 'arearis/base.html' %}
+{% block content %}
+	<div class="container">
+	<h2>Documentazione Inviata</h2>
+	{% for post in posts %}
+	<div class="col-md-4">
+	<div class="thumbnail">
+		  <div class="post">
+		  <h3>{{ post.titolo }}</h3>
+			<a href="">{{ post.upload }}</a>
+			<p>{{ post.tipofile|linebreaksbr }}</p>
+		</div>
+	</div>
+	</div>
+	{% endfor %}
+	<div class="col-md-4">
+	    <div class="thumbnail">
+	      <img src="lunaPiccola.JPG" class="img-responsive" alt="...">
+	    </div>
+	</div>
+	  <div class="row">
+	    <div class="col-md-8"><h1>Documentazione Inviata</h1>
+		{% for post in posts %}
+			<div class="post">
+			<div class="date">
+			    {{ post.titolo }}
+			</div>
+			<h3><a href="">{{ post.upload }}</a></h3>
+			<p>{{ post.tipofile|linebreaksbr }}</p>
+		{% endfor %}
+	    </div>
+	    	<button type="button" class="btn btn-default btn-sm">Carica File</button>
+	    </div>
+	    <div class="col-md-4"> <h1>Archiviati</h1></div>
+	  </div>
+	  <div class="row">
+	    <div class="col-md-8"><h1>Documentazione per te</h1>"Documentazione per te"</div>
+	    <div class="col-md-4"> <h1>Archiviati</h1>"Documentazione per te"</div>
+	  </div>
+	  <div class="row">
+	    <div class="col-md-8"><h1>Comunicazioni allo studio</h1>"Comunicazioni allo studio"</div>
+ 	    <div class="col-md-4"> <h1>Archiviati</h1>"Documentazione per te"</div>
+	  </div>
+	</div>    
+
+{% endblock content %}
+
+
+
+

@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Django Girls blog</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/areaupdown.css' %}">
+    </head>
+    <body>
+        <div class="page-header">
+            <h1><a href="">Django Girls Blog</a></h1>
+        </div>
+	<div class="container">
+	  <div class="row">
+	    <div class="col-md-8"><h1>Documentazione Inviata</h1>"Documentazione Inviata"
+	    	<button type="button" class="btn btn-default btn-sm">Carica File</button>
+	    </div>
+	    <div class="col-md-4"> <h1>Archiviati</h1>"Documentazione per te"</div>
+	  </div>
+	  <div class="row">
+	    <div class="col-md-8"><h1>Documentazione per te</h1>"Documentazione per te"</div>
+	    <div class="col-md-4"> <h1>Archiviati</h1>"Documentazione per te"</div>
+	  </div>
+	  <div class="row">
+	    <div class="col-md-8"><h1>Comunicazioni allo studio</h1>"Comunicazioni allo studio"</div>
+ 	    <div class="col-md-4"> <h1>Archiviati</h1>"Documentazione per te"</div>
+	  </div>
+	</div>
+        {% for post in posts %}
+    	<div class="post">
+        	<p>published: {{ post.ragsoc }}</p>
+        	<h1><a href="">{{ post.indirizzo }}</a></h1>
+        	<p>{{ post.text|linebreaksbr }}</p>
+    	</div>
+	{% endfor %}
+    </body>
+</html>
+

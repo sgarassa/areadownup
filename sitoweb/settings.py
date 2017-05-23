@@ -15,6 +15,11 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+EMAIL_HOST = 'mail.tianetworks.it'
+EMAIL_HOST_USER = 'raffaele.lionetti@tianetworks.it'
+EMAIL_HOST_PASSWORD = 'raf33lio'
+EMAIL_PORT = 25
+EMAIL_USE_TLS = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -37,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'arearis',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -100,3 +106,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
