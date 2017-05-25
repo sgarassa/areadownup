@@ -14,6 +14,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from wsgiref.util import FileWrapper
 from django.core.servers.basehttp import FileWrapper
+from django.shortcuts import render, get_object_or_404
 import os, tempfile, zipfile
 import mimetypes
 
@@ -27,7 +28,7 @@ def post_list2(request):
 
 def post_list(request):
     posts = File.objects.filter(utente__lte=request.user).order_by('utente')
-    send_mail('Ciao', 'Ciao ciao', 'raffaele.lionetti@tianetworks.it', ['raffaele.lionetti@tianetworks.it'], fail_silently=False)
+    send_mail('Ciao', 'Ciao ciao', 'ra.lionetti@gmail.com', [request.user.email], fail_silently=False)
     return render(request, 'arearis/post_list.html', {'posts': posts})
 
 def add_file(request):
@@ -62,9 +63,11 @@ def model_form_upload(request):
         if form.is_valid():
             form = form.save(commit=False)
             form.utente = request.user
+            azie = Azienda.objects.filter(utente = request.user)
+            #form.azienda = azie[0].ragsoc#File.objects.filter(azienda = azie) #File.objects.filter(azienda = Azienda.objects.filter(utente = request.user))
             form.created_date = timezone.now()
             form.save()
-            send_mail('Ciao', 'Ciao ciao', 'raffaele.lionetti@tianetworks.it', ['raffaele.lionetti@tianetworks.it'], fail_silently=False)
+            send_mail('Ciao', 'Ciao ciao', 'ra.lionetti@gmail.com', ['raffaele.lionetti@tianetworks.it'], fail_silently=False)
             #return redirect('home')
     else:
         form = DocumentForm()
@@ -74,24 +77,48 @@ def model_form_upload(request):
 
 
 def download1(request, path):
-    filename = 'media/upload/M73017_20170000_CR.pdf'
+    filename = 'upload/M73017_20170000_CR.pdf'
     wrapper = FileWrapper(filename)
     response = HttpResponse(wrapper,content_type=mimetypes.guess_type(filename)[0])
     response['Content-Length'] = os.path.getsize(filename)
     response['Content-Disposition'] = "attachment; filename=" + filename
     return response
 
-def download(request):
-    fp = open('media/upload/M73017_20170000_CR.pdf', 'rb')
+def download(request, pk):
+    percorso = File.objects.filter(pk=pk)
+    perc = str(percorso[0].upload)
+#'upload/M73017_20170000_CR_V8n7RGz.pdf'
+    fp = open(perc, 'rb')
     response = HttpResponse(fp.read())
     fp.close()
-    type, encoding = mimetypes.guess_type('M73017_20170000_CR.pdf')
+    type, encoding = mimetypes.guess_type(perc)
     if type is None:
         type = 'application/octet-stream'
     response['Content-Type'] = type
-    response['Content-Length'] = str(os.stat('media/upload').st_size)
+    response['Content-Length'] = str(os.stat(perc).st_size)
     if encoding is not None:
         response['Content-Encoding'] = encoding
 
 
     return response
+
+#def download(request):
+#    fp = open('upload/gestionerischi.tar.gz', 'rb')
+#    response = HttpResponse(fp.read())
+#    fp.close()
+#    type, encoding = mimetypes.guess_type('gestionerischi.tar.gz')
+#    if type is None:
+#        type = 'application/octet-stream'
+#    response['Content-Type'] = type
+#    response['Content-Length'] = str(os.stat('upload/gestionerischi.tar.gz').st_size)
+#    if encoding is not None:
+#        response['Content-Encoding'] = encoding
+#
+#
+#    return response
+
+def post_detail(request, pk):
+        post = get_object_or_404(File, pk=pk)
+        return render(request, 'arearis/post_list.html', {'post': post})
+
+

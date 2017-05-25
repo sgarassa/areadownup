@@ -15,11 +15,13 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-EMAIL_HOST = 'mail.tianetworks.it'
-EMAIL_HOST_USER = 'raffaele.lionetti@tianetworks.it'
-EMAIL_HOST_PASSWORD = 'raf33lio'
-EMAIL_PORT = 25
-EMAIL_USE_TLS = False
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ra.lionetti@gmail.com'
+EMAIL_HOST_PASSWORD = '25072011'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/

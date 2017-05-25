@@ -13,7 +13,7 @@ class FileForm(forms.ModelForm):
 
     class Meta:
         model = File
-        fields = ('titolo', 'upload', 'tipofile',)
+        fields = ('azienda', 'titolo', 'upload', 'tipofile',)
 
 #class FileForm(forms.Form):
 #	upload = forms.FileField(

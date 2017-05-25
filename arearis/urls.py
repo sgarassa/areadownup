@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^file/add/$', views.add_file, name='add_file'),
     url(r'^file/adds/$', views.model_form_upload, name='model_form_upload'),
     url(r'^download/$', views.download, name='download'),
+    url(r'^post/(?P<pk>[0-9]+)/$', views.download, name='download'),
 ]

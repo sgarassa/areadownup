@@ -7,7 +7,7 @@
 	<div class="thumbnail">
 		  <div class="post">
 		  <h3>{{ post.titolo }}</h3>
-			<a href="">{{ post.upload }}</a>
+                        <a href="{% url 'download' pk=post.pk %}">{{ post.upload }}</a>
 			<p>{{ post.tipofile|linebreaksbr }}</p>
 		</div>
 	</div>

@@ -15,11 +15,16 @@ class FamigliaFileOption(admin.ModelAdmin):
 
 
 class FileFileOption(admin.ModelAdmin):
-	list_display = ('utente', 'titolo', 'upload', 'tipofile', 'created_date', 'flag_vis')
-	search_fields = ('utente', 'titolo','created_date',)
-	def azie(self, File):
-		return File.azienda.ragsoc
+       list_display = ('azie', 'utente', 'tipofile', 'upload', 'created_date', 'flag_vis')
+       search_fields = ('utente', 'created_date',)
+       raw_id_fields = ('azienda', 'tipofile',)
+       def azie(self, File):
+	       return File.azienda.ragsoc
 
+       azie.short_description = "Azienda"
+       azie.allow_tags = True 
+       
+	
 class NewsFileOption(admin.ModelAdmin):
 	list_display = ('utente', 'titolo', 'descrizione', 'flag_vis', 'created_date')
 	search_fields = ('utente', 'titolo', 'descrizione', 'created_date',)
